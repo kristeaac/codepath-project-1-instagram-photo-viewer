@@ -18,7 +18,7 @@ The following **optional** features are implemented:
 * [X] User can **pull-to-refresh** popular stream to get the latest popular photos
 * [ ] Show latest comments for each photo
 * [ ] Display each photo with the same style and proportions as the real Instagram
-* [ ] Display each user profile image using a RoundedImageViewDisplay each user profile image using a [RoundedImageView](https://github.com/vinc3m1/RoundedImageView)
+* [X] Display each user profile image using a RoundedImageViewDisplay each user profile image using a [RoundedImageView](https://github.com/vinc3m1/RoundedImageView)
 * [ ] Display a nice default placeholder graphic for each image during loading
 * [ ] Improved the user interface through styling and coloring
 
@@ -50,6 +50,7 @@ Describe any challenges encountered while building the app.
 - [Picasso](http://square.github.io/picasso/) - Image loading and caching library for Android
 - [Jackson](https://github.com/FasterXML/jackson) - JSON parser
 - [PrettyTime](https://github.com/ocpsoft/prettytime/) - Social style date and time formatting
+- [RoundedImageView](https://github.com/vinc3m1/RoundedImageView) - An ImageView that supports rounded corners
 
 ## License
 

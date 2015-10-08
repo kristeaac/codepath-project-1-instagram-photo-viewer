@@ -1,6 +1,7 @@
 package com.codepath.instagramphotoviewer.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.instagramphotoviewer.model.instagram.Caption;
+import com.codepath.instagramphotoviewer.model.instagram.Image;
 import com.codepath.instagramphotoviewer.model.instagram.Photo;
 import com.codepath.instragamphotoviewer.R;
 import com.squareup.picasso.Picasso;
@@ -46,7 +48,8 @@ public class PhotosAdapter extends ArrayAdapter<Photo> {
         tvLikeCount.setText(String.valueOf(photo.getLikes().getCount()));
         ivPhoto.setImageResource(0);
         ivUserPhoto.setImageResource(0);
-        Picasso.with(getContext()).load(photo.getImages().getStandardResolutionImage().getUrl()).into(ivPhoto);
+        Image standardResolutionImage = photo.getImages().getStandardResolutionImage();
+        Picasso.with(getContext()).load(standardResolutionImage.getUrl()).into(ivPhoto);
         Picasso.with(getContext()).load(photo.getUser().getProfilePictureUrl()).into(ivUserPhoto);
         return convertView;
     }
