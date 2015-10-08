@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivPhoto"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:minHeight="50dp"
+         />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivPhoto"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivUserPhoto"
+            android:minHeight="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="this is a test caption"
+            android:id="@+id/tvCaption"
+            android:textSize="20sp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/ivUserPhoto"
+            android:layout_toStartOf="@+id/tvLikeCount"
+            android:layout_toLeftOf="@+id/tvLikeCount" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="posted by"
+            android:layout_marginRight="4dp"
+            android:id="@+id/tvPostedBy"
+            android:layout_below="@+id/tvCaption"
+            android:layout_toRightOf="@+id/ivUserPhoto"
+            android:layout_toEndOf="@+id/ivUserPhoto" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="username"
+            android:layout_marginRight="4dp"
+            android:id="@+id/tvUsername"
+            android:minHeight="100dp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:layout_alignTop="@+id/tvPostedBy"
+            android:layout_toRightOf="@+id/tvPostedBy"
+            android:layout_toEndOf="@+id/tvPostedBy"
+            android:layout_alignBottom="@+id/tvPostedBy" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10 mins ago"
+            android:id="@+id/tvPostedTime"
+            android:layout_below="@+id/tvCaption"
+            android:layout_toRightOf="@+id/tvUsername"
+            android:layout_toEndOf="@+id/tvUsername" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Likes"
+            android:id="@+id/tvLikes"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="42"
+            android:id="@+id/tvLikeCount"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/tvLikes"
+            android:layout_toStartOf="@+id/tvLikes" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
