@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Photo {
+    private String id;
     private String type;
     private Images images;
     private Caption caption;
@@ -61,5 +62,13 @@ public class Photo {
 
     public void setComments(Comments comments) {
         this.comments = comments;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

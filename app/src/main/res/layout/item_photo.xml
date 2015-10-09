@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10 mins ago"
+            android:text="@string/postedTime"
             android:id="@+id/tvPostedTime"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" Likes"
+            android:text="@string/likes"
             android:textColor="@android:color/holo_green_light"
             android:id="@+id/tvLikes"
             android:layout_alignParentTop="true"
@@ -33,7 +33,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="42"
+            android:text="@string/likeCount"
             android:textColor="@android:color/holo_green_light"
             android:id="@+id/tvLikeCount"
             android:layout_marginLeft="10dp"
@@ -82,7 +82,7 @@
             android:scaleType="fitCenter"
             app:riv_corner_radius="30dip"
             app:riv_border_width="2dip"
-            app:riv_border_color="#333333"
+            app:riv_border_color="@android:color/holo_blue_light"
             app:riv_mutate_background="true"
             app:riv_tile_mode="repeat"
             app:riv_oval="true"
@@ -107,7 +107,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="posted by"
+            android:text="@string/postedBy"
             android:id="@+id/tvPostedBy"
             android:layout_marginRight="4dp"
             android:layout_alignParentTop="true"
@@ -117,7 +117,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="username"
+            android:text="@string/username"
             android:textColor="@android:color/holo_blue_light"
             android:id="@+id/tvUsername"
             android:minHeight="100dp"
@@ -151,7 +151,7 @@
             android:scaleType="fitCenter"
             app:riv_corner_radius="30dip"
             app:riv_border_width="2dip"
-            app:riv_border_color="#333333"
+            app:riv_border_color="@android:color/holo_red_light"
             app:riv_mutate_background="true"
             app:riv_tile_mode="repeat"
             app:riv_oval="true"
@@ -163,7 +163,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="comment from"
+            android:text="@string/commentFrom"
             android:id="@+id/tvCommentFrom1"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/ivCommenterPhoto1"
@@ -173,7 +173,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="username"
+            android:text="@string/username"
             android:textColor="@android:color/holo_red_light"
             android:id="@+id/tvCommenterUsername1"
             android:minHeight="100dp"
@@ -188,7 +188,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="this is a test caption"
+            android:text="@string/testCaption"
             android:id="@+id/tvComment1"
             android:textSize="20sp"
             android:maxLines="3"
@@ -220,7 +220,7 @@
             android:scaleType="fitCenter"
             app:riv_corner_radius="30dip"
             app:riv_border_width="2dip"
-            app:riv_border_color="#333333"
+            app:riv_border_color="@android:color/holo_red_light"
             app:riv_mutate_background="true"
             app:riv_tile_mode="repeat"
             app:riv_oval="true"
@@ -232,7 +232,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="comment from"
+            android:text="@string/commentFrom"
             android:id="@+id/tvCommentFrom2"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/ivCommenterPhoto2"
@@ -242,7 +242,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="username"
+            android:text="@string/username"
             android:textColor="@android:color/holo_red_light"
             android:id="@+id/tvCommenterUsername2"
             android:minHeight="100dp"
@@ -257,7 +257,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="this is a test caption"
+            android:text="@string/testCaption"
             android:id="@+id/tvComment2"
             android:textSize="20sp"
             android:maxLines="3"
@@ -268,5 +268,18 @@
             android:layout_alignEnd="@+id/tvCommenterUsername2" />
 
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/moreComments"
+        android:textColor="@android:color/white"
+        android:id="@+id/tvMoreComments"
+        android:paddingBottom="4dp"
+        android:paddingRight="4dp"
+        android:layout_below="@+id/rlComment2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

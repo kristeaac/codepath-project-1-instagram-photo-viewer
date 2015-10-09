@@ -1,6 +1,7 @@
 package com.codepath.instagramphotoviewer.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.codepath.instagramphotoviewer.activity.CommentsActivity;
+import com.codepath.instagramphotoviewer.constant.ExtraKeys;
 import com.codepath.instagramphotoviewer.model.instagram.Caption;
 import com.codepath.instagramphotoviewer.model.instagram.Comment;
 import com.codepath.instagramphotoviewer.model.instagram.Comments;
@@ -31,7 +34,7 @@ public class PhotosAdapter extends ArrayAdapter<Photo> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Photo photo = getItem(position);
+        final Photo photo = getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_photo, parent, false);
         }
@@ -55,17 +58,18 @@ public class PhotosAdapter extends ArrayAdapter<Photo> {
         Picasso.with(getContext()).load(photo.getUser().getProfilePictureUrl()).into(ivUserPhoto);
 
         Comments comments = photo.getComments();
-        int commentCount = comments.getCount();
-        if (commentCount == 0) {
-            convertView.findViewById(R.id.rlComment1).setVisibility(View.INVISIBLE);
-            convertView.findViewById(R.id.rlComment2).setVisibility(View.INVISIBLE);
-        } else if (commentCount == 1) {
-            populateFirstComment(convertView, comments.getComments().get(0));
-            convertView.findViewById(R.id.rlComment2).setVisibility(View.INVISIBLE);
-        } else {
-            populateFirstComment(convertView, comments.getComments().get(0));
-            populateSecondComment(convertView, comments.getComments().get(1));
-        }
+        populateFirstComment(convertView, comments.getComments().get(0));
+        populateSecondComment(convertView, comments.getComments().get(1));
+        TextView tvMoreComments = (TextView) convertView.findViewById(R.id.tvMoreComments);
+        tvMoreComments.setText(String.format("%s total comments", comments.getCount()));
+        tvMoreComments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CommentsActivity.class);
+                intent.putExtra(ExtraKeys.PHOTO_ID, photo.getId());
+                getContext().startActivity(intent);
+            }
+        });
 
         return convertView;
     }
