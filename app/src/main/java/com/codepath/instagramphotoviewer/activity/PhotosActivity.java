@@ -4,27 +4,18 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.codepath.instagramphotoviewer.adapter.PhotosAdapter;
 import com.codepath.instagramphotoviewer.model.instagram.Photo;
+import com.codepath.instagramphotoviewer.service.InstagramHelper;
 import com.codepath.instragamphotoviewer.R;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-
-import org.apache.http.Header;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class PhotosActivity extends Activity {
-    private static final String CLIENT_ID = "bc6c997f0da6402f927e7595180c5a83";
     private List<Photo> photos;
     private PhotosAdapter aPhotos;
     private SwipeRefreshLayout swipeContainer;
@@ -46,7 +37,6 @@ public class PhotosActivity extends Activity {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
                 fetchPopularPhotos();
             }
         });
@@ -59,30 +49,18 @@ public class PhotosActivity extends Activity {
 
 
     private void fetchPopularPhotos() {
-        String url = "https://api.instagram.com/v1/media/popular?client_id=" + CLIENT_ID;
-
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(url, null, new JsonHttpResponseHandler() {
+        InstagramHelper.fetchPopularPhotos(new InstagramHelper.PhotosResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onSuccess(List<Photo> popularPhotos) {
                 aPhotos.clear();
-                ObjectMapper mapper = new ObjectMapper();
-                try {
-                    JSONArray photosJson = response.getJSONArray("data");
-                    for (int i = 0; i < photosJson.length(); i++) {
-                        photos.add(mapper.readValue(photosJson.getJSONObject(i).toString(), Photo.class));
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
+                photos.addAll(popularPhotos);
                 aPhotos.notifyDataSetChanged();
                 swipeContainer.setRefreshing(false);
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-
+            public void onFailure(String errorMessage, Throwable throwable) {
+                Log.e("ERROR", errorMessage, throwable);
             }
         });
     }
