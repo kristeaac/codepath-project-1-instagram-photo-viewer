@@ -77,12 +77,20 @@ public class MediaAdapter extends ArrayAdapter<Media> {
 
         Comments comments = media.getComments();
         List<Comment> commentsList = comments.getComments();
-        if (!commentsList.isEmpty()) {
+        int commentCount = comments.getCount();
+        if (commentCount >= 2) {
             populateFirstComment(convertView, commentsList.get(0));
             populateSecondComment(convertView, commentsList.get(1));
+        } else if (commentCount == 1) {
+            populateFirstComment(convertView, commentsList.get(0));
+            hideSecondComment(convertView);
+        } else {
+            hideFirstComment(convertView);
+            hideSecondComment(convertView);
         }
+
         TextView tvMoreComments = (TextView) convertView.findViewById(R.id.tvMoreComments);
-        tvMoreComments.setText(String.format("%s total comments", comments.getCount()));
+        tvMoreComments.setText(String.format("%s total comment(s)", commentCount));
         tvMoreComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,6 +126,20 @@ public class MediaAdapter extends ArrayAdapter<Media> {
         tvComment.setText(comment.getText());
         ivCommenterUserPhoto.setImageResource(0);
         Picasso.with(getContext()).load(from.getProfilePictureUrl()).into(ivCommenterUserPhoto);
+    }
+
+    private void hideFirstComment(View convertView) {
+        int commentResourceId = R.id.rlComment1;
+        hideComment(convertView, commentResourceId);
+    }
+
+    private void hideSecondComment(View convertView) {
+        int commentResourceId = R.id.rlComment2;
+        hideComment(convertView, commentResourceId);
+    }
+
+    private void hideComment(View convertView, int commentResourceId) {
+        convertView.findViewById(commentResourceId).setVisibility(View.INVISIBLE);
     }
 
 }
