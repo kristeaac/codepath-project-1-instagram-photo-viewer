@@ -1,7 +1,6 @@
 package com.codepath.instagramphotoviewer.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,8 +48,9 @@ public class PhotosAdapter extends ArrayAdapter<Photo> {
         ivPhoto.setImageResource(0);
         ivUserPhoto.setImageResource(0);
         Image standardResolutionImage = photo.getImages().getStandardResolutionImage();
-        Picasso.with(getContext()).load(standardResolutionImage.getUrl()).into(ivPhoto);
+        Picasso.with(getContext()).load(standardResolutionImage.getUrl()).placeholder(R.drawable.loading).into(ivPhoto);
         Picasso.with(getContext()).load(photo.getUser().getProfilePictureUrl()).into(ivUserPhoto);
         return convertView;
     }
+
 }
