@@ -6,8 +6,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.ListView;
 
-import com.codepath.instagramphotoviewer.adapter.PhotosAdapter;
-import com.codepath.instagramphotoviewer.model.instagram.Photo;
+import com.codepath.instagramphotoviewer.adapter.MediaAdapter;
+import com.codepath.instagramphotoviewer.model.instagram.Media;
 import com.codepath.instagramphotoviewer.service.InstagramHelper;
 import com.codepath.instragamphotoviewer.R;
 
@@ -15,21 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PhotosActivity extends Activity {
-    private List<Photo> photos;
-    private PhotosAdapter aPhotos;
+public class MediaActivity extends Activity {
+    private List<Media> media;
+    private MediaAdapter aMedia;
     private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_photos);
+        setContentView(R.layout.activity_media);
         setupSwitchRefreshLayout();
-        photos = new ArrayList<>();
-        aPhotos = new PhotosAdapter(this, photos);
-        ListView lvPhotos = (ListView) findViewById(R.id.lvPhotos);
-        lvPhotos.setAdapter(aPhotos);
-        fetchPopularPhotos();
+        media = new ArrayList<>();
+        aMedia = new MediaAdapter(this, media);
+        ListView lvMedia = (ListView) findViewById(R.id.lvMedia);
+        lvMedia.setAdapter(aMedia);
+        fetchPopularMedia();
     }
 
     private void setupSwitchRefreshLayout() {
@@ -37,7 +37,7 @@ public class PhotosActivity extends Activity {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                fetchPopularPhotos();
+                fetchPopularMedia();
             }
         });
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -48,13 +48,13 @@ public class PhotosActivity extends Activity {
     }
 
 
-    private void fetchPopularPhotos() {
-        InstagramHelper.fetchPopularPhotos(new InstagramHelper.PhotosResponseHandler() {
+    private void fetchPopularMedia() {
+        InstagramHelper.fetchPopularMedia(new InstagramHelper.MediaResponseHandler() {
             @Override
-            public void onSuccess(List<Photo> popularPhotos) {
-                aPhotos.clear();
-                photos.addAll(popularPhotos);
-                aPhotos.notifyDataSetChanged();
+            public void onSuccess(List<Media> popularMedia) {
+                aMedia.clear();
+                media.addAll(popularMedia);
+                aMedia.notifyDataSetChanged();
                 swipeContainer.setRefreshing(false);
             }
 

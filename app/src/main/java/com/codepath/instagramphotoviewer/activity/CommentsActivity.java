@@ -28,7 +28,7 @@ public class CommentsActivity extends Activity {
         setContentView(R.layout.activity_comments);
 
         Intent intent = getIntent();
-        photoId = intent.getStringExtra(ExtraKeys.PHOTO_ID);
+        photoId = intent.getStringExtra(ExtraKeys.MEDIA_ID);
         setupSwitchRefreshLayout();
 
         comments = new ArrayList<>();

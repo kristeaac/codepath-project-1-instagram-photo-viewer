@@ -15,7 +15,7 @@ import com.codepath.instagramphotoviewer.model.instagram.Caption;
 import com.codepath.instagramphotoviewer.model.instagram.Comment;
 import com.codepath.instagramphotoviewer.model.instagram.Comments;
 import com.codepath.instagramphotoviewer.model.instagram.Image;
-import com.codepath.instagramphotoviewer.model.instagram.Photo;
+import com.codepath.instagramphotoviewer.model.instagram.Media;
 import com.codepath.instagramphotoviewer.model.instagram.User;
 import com.codepath.instragamphotoviewer.R;
 import com.squareup.picasso.Picasso;
@@ -25,18 +25,18 @@ import org.ocpsoft.prettytime.PrettyTime;
 import java.util.Date;
 import java.util.List;
 
-public class PhotosAdapter extends ArrayAdapter<Photo> {
+public class MediaAdapter extends ArrayAdapter<Media> {
     private static final PrettyTime PRETTY_TIME = new PrettyTime();
 
-    public PhotosAdapter(Context context, List<Photo> photos) {
-        super(context, android.R.layout.simple_list_item_1, photos);
+    public MediaAdapter(Context context, List<Media> media) {
+        super(context, android.R.layout.simple_list_item_1, media);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Photo photo = getItem(position);
+        final Media media = getItem(position);
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_photo, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_media, parent, false);
         }
         TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
         TextView tvPostedTime = (TextView) convertView.findViewById(R.id.tvPostedTime);
@@ -44,20 +44,20 @@ public class PhotosAdapter extends ArrayAdapter<Photo> {
         TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
         TextView tvLikeCount = (TextView) convertView.findViewById(R.id.tvLikeCount);
         ImageView ivUserPhoto = (ImageView) convertView.findViewById(R.id.ivUserPhoto);
-        Caption caption = photo.getCaption();
+        Caption caption = media.getCaption();
         if (caption != null) {
             tvCaption.setText(caption.getText());
             tvPostedTime.setText(PRETTY_TIME.format(new Date(Long.parseLong(caption.getCreatedTime()) * 1000)));
         }
-        tvUsername.setText(photo.getUser().getUsername());
-        tvLikeCount.setText(String.valueOf(photo.getLikes().getCount()));
+        tvUsername.setText(media.getUser().getUsername());
+        tvLikeCount.setText(String.valueOf(media.getLikes().getCount()));
         ivPhoto.setImageResource(0);
         ivUserPhoto.setImageResource(0);
-        Image standardResolutionImage = photo.getImages().getStandardResolutionImage();
+        Image standardResolutionImage = media.getImages().getStandardResolutionImage();
         Picasso.with(getContext()).load(standardResolutionImage.getUrl()).placeholder(R.drawable.loading).into(ivPhoto);
-        Picasso.with(getContext()).load(photo.getUser().getProfilePictureUrl()).into(ivUserPhoto);
+        Picasso.with(getContext()).load(media.getUser().getProfilePictureUrl()).into(ivUserPhoto);
 
-        Comments comments = photo.getComments();
+        Comments comments = media.getComments();
         populateFirstComment(convertView, comments.getComments().get(0));
         populateSecondComment(convertView, comments.getComments().get(1));
         TextView tvMoreComments = (TextView) convertView.findViewById(R.id.tvMoreComments);
@@ -66,7 +66,7 @@ public class PhotosAdapter extends ArrayAdapter<Photo> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CommentsActivity.class);
-                intent.putExtra(ExtraKeys.PHOTO_ID, photo.getId());
+                intent.putExtra(ExtraKeys.MEDIA_ID, media.getId());
                 getContext().startActivity(intent);
             }
         });

@@ -1,7 +1,7 @@
 package com.codepath.instagramphotoviewer.service;
 
 import com.codepath.instagramphotoviewer.model.instagram.Comment;
-import com.codepath.instagramphotoviewer.model.instagram.Photo;
+import com.codepath.instagramphotoviewer.model.instagram.Media;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -16,7 +16,7 @@ import java.util.List;
 public class InstagramHelper {
     private static final String CLIENT_ID = "bc6c997f0da6402f927e7595180c5a83";
 
-    public static void fetchPopularPhotos(final PhotosResponseHandler handler) {
+    public static void fetchPopularMedia(final MediaResponseHandler handler) {
         String url = String.format("https://api.instagram.com/v1/media/popular?client_id=%s", CLIENT_ID);
 
         AsyncHttpClient client = new AsyncHttpClient();
@@ -24,16 +24,16 @@ public class InstagramHelper {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 ObjectMapper mapper = new ObjectMapper();
-                List<Photo> photos = new ArrayList<>();
+                List<Media> media = new ArrayList<>();
                 try {
-                    JSONArray photosJson = response.getJSONArray("data");
-                    for (int i = 0; i < photosJson.length(); i++) {
-                        photos.add(mapper.readValue(photosJson.getJSONObject(i).toString(), Photo.class));
+                    JSONArray mediaJson = response.getJSONArray("data");
+                    for (int i = 0; i < mediaJson.length(); i++) {
+                        media.add(mapper.readValue(mediaJson.getJSONObject(i).toString(), Media.class));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                handler.onSuccess(photos);
+                handler.onSuccess(media);
             }
 
             @Override
@@ -53,9 +53,9 @@ public class InstagramHelper {
                 ObjectMapper mapper = new ObjectMapper();
                 List<Comment> comments = new ArrayList<>();
                 try {
-                    JSONArray photosJson = response.getJSONArray("data");
-                    for (int i = 0; i < photosJson.length(); i++) {
-                        comments.add(mapper.readValue(photosJson.getJSONObject(i).toString(), Comment.class));
+                    JSONArray commentsJson = response.getJSONArray("data");
+                    for (int i = 0; i < commentsJson.length(); i++) {
+                        comments.add(mapper.readValue(commentsJson.getJSONObject(i).toString(), Comment.class));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -70,9 +70,9 @@ public class InstagramHelper {
         });
     }
 
-    public static interface PhotosResponseHandler {
+    public static interface MediaResponseHandler {
 
-        void onSuccess(List<Photo> photos);
+        void onSuccess(List<Media> medias);
 
         void onFailure(String errorMessage, Throwable throwable);
 
