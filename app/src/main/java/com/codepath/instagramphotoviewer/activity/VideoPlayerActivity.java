@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
@@ -14,7 +15,7 @@ public class VideoPlayerActivity extends Activity implements MediaPlayer.OnCompl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_video_player);
 
         VideoView v = (VideoView) findViewById(R.id.vvVideo);
