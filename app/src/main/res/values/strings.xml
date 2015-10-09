@@ -13,5 +13,6 @@
     <string name="title_activity_comments">All Comments</string>
     <string name="clickToPlayVideo">CLICK TO PLAY</string>
     <string name="title_activity_video_play">Video Player</string>
+    <string name="title_activity_popular_media">What\'s Popular on Instagram</string>
 
 </resources>
