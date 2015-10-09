@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.instagramphotoviewer.activity.CommentsActivity;
+import com.codepath.instagramphotoviewer.activity.VideoPlayerActivity;
 import com.codepath.instagramphotoviewer.constant.ExtraKeys;
 import com.codepath.instagramphotoviewer.model.instagram.Caption;
 import com.codepath.instagramphotoviewer.model.instagram.Comment;
@@ -44,6 +45,23 @@ public class MediaAdapter extends ArrayAdapter<Media> {
         TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
         TextView tvLikeCount = (TextView) convertView.findViewById(R.id.tvLikeCount);
         ImageView ivUserPhoto = (ImageView) convertView.findViewById(R.id.ivUserPhoto);
+
+        if (media.isVideo()) {
+            ImageView ivClickToPlay = (ImageView) convertView.findViewById(R.id.ivClickToPlayVideo);
+            ivClickToPlay.setVisibility(View.VISIBLE);
+            ivClickToPlay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), VideoPlayerActivity.class);
+                    intent.putExtra(ExtraKeys.URL, media.getVideos().getStandardResolutionVideo().getUrl());
+                    getContext().startActivity(intent);
+                }
+            });
+        } else {
+            ImageView tvClickToPlay = (ImageView) convertView.findViewById(R.id.ivClickToPlayVideo);
+            tvClickToPlay.setVisibility(View.INVISIBLE);
+        }
+
         Caption caption = media.getCaption();
         if (caption != null) {
             tvCaption.setText(caption.getText());
@@ -58,8 +76,11 @@ public class MediaAdapter extends ArrayAdapter<Media> {
         Picasso.with(getContext()).load(media.getUser().getProfilePictureUrl()).into(ivUserPhoto);
 
         Comments comments = media.getComments();
-        populateFirstComment(convertView, comments.getComments().get(0));
-        populateSecondComment(convertView, comments.getComments().get(1));
+        List<Comment> commentsList = comments.getComments();
+        if (!commentsList.isEmpty()) {
+            populateFirstComment(convertView, commentsList.get(0));
+            populateSecondComment(convertView, commentsList.get(1));
+        }
         TextView tvMoreComments = (TextView) convertView.findViewById(R.id.tvMoreComments);
         tvMoreComments.setText(String.format("%s total comments", comments.getCount()));
         tvMoreComments.setOnClickListener(new View.OnClickListener() {

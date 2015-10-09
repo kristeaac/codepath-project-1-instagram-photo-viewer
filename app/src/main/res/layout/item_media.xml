@@ -42,33 +42,54 @@
             android:layout_toStartOf="@+id/tvLikes" />
 
     </RelativeLayout>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ivPhoto"
-        android:layout_below="@+id/rlTopBar"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:minHeight="50dp"
-         />
 
     <RelativeLayout
+        android:id="@+id/rlPhoto"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ivPhoto"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:padding="10dp"
-        android:id="@+id/relativeLayout">
+        android:layout_below="@+id/rlTopBar"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivPhoto"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:minHeight="50dp"
+            />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/play_button"
+            android:id="@+id/ivClickToPlayVideo"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:visibility="invisible"/>
+
+        <!--<TextView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+            <!--android:text="@string/clickToPlayVideo"-->
+            <!--android:background="#cc000000"-->
+            <!--android:id="@+id/tvClickToPlayVideo"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:visibility="invisible"/>-->
 
     </RelativeLayout>
 
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/relativeLayout"
+        android:layout_below="@+id/rlPhoto"
         android:id="@+id/rlUser"
         android:padding="10dp">
 

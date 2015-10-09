@@ -11,6 +11,7 @@ public class Media {
     private User user;
     private Likes likes;
     private Comments comments;
+    private Videos videos;
 
     public String getType() {
         return type;
@@ -74,5 +75,13 @@ public class Media {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Videos getVideos() {
+        return videos;
+    }
+
+    public void setVideos(Videos videos) {
+        this.videos = videos;
     }
 }

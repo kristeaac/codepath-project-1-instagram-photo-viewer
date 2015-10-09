@@ -22,6 +22,10 @@
             android:name="com.codepath.instagramphotoviewer.activity.CommentsActivity"
             android:label="@string/title_activity_comments" >
         </activity>
+        <activity
+            android:name="com.codepath.instagramphotoviewer.activity.VideoPlayerActivity"
+            android:label="@string/title_activity_video_play" >
+        </activity>
     </application>
 
 </manifest>
