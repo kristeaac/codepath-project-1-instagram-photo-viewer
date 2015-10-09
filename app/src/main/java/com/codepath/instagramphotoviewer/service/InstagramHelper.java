@@ -1,5 +1,6 @@
 package com.codepath.instagramphotoviewer.service;
 
+import com.codepath.instagramphotoviewer.model.instagram.Comment;
 import com.codepath.instagramphotoviewer.model.instagram.Photo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.loopj.android.http.AsyncHttpClient;
@@ -16,7 +17,7 @@ public class InstagramHelper {
     private static final String CLIENT_ID = "bc6c997f0da6402f927e7595180c5a83";
 
     public static void fetchPopularPhotos(final PhotosResponseHandler handler) {
-        String url = "https://api.instagram.com/v1/media/popular?client_id=" + CLIENT_ID;
+        String url = String.format("https://api.instagram.com/v1/media/popular?client_id=%s", CLIENT_ID);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(url, null, new JsonHttpResponseHandler() {
@@ -42,6 +43,33 @@ public class InstagramHelper {
         });
     }
 
+    public static void fetchComments(String mediaId, final CommentsResponseHandler handler) {
+        String url = String.format("https://api.instagram.com/v1/media/%s/comments?client_id=%s", mediaId, CLIENT_ID);
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(url, null, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                ObjectMapper mapper = new ObjectMapper();
+                List<Comment> comments = new ArrayList<>();
+                try {
+                    JSONArray photosJson = response.getJSONArray("data");
+                    for (int i = 0; i < photosJson.length(); i++) {
+                        comments.add(mapper.readValue(photosJson.getJSONObject(i).toString(), Comment.class));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                handler.onSuccess(comments);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                handler.onFailure(responseString, throwable);
+            }
+        });
+    }
+
     public static interface PhotosResponseHandler {
 
         void onSuccess(List<Photo> photos);
@@ -49,4 +77,13 @@ public class InstagramHelper {
         void onFailure(String errorMessage, Throwable throwable);
 
     }
+
+    public static interface CommentsResponseHandler {
+
+        void onSuccess(List<Comment> comments);
+
+        void onFailure(String errorMessage, Throwable throwable);
+
+    }
+
 }
