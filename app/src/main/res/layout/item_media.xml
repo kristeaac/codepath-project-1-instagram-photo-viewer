@@ -69,18 +69,6 @@
             android:gravity="center_horizontal"
             android:visibility="invisible"/>
 
-        <!--<TextView-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-            <!--android:text="@string/clickToPlayVideo"-->
-            <!--android:background="#cc000000"-->
-            <!--android:id="@+id/tvClickToPlayVideo"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:gravity="center_horizontal"-->
-            <!--android:visibility="invisible"/>-->
-
     </RelativeLayout>
 
 
