@@ -9,6 +9,7 @@ public class Photo {
     private Caption caption;
     private User user;
     private Likes likes;
+    private Comments comments;
 
     public String getType() {
         return type;
@@ -52,5 +53,13 @@ public class Photo {
 
     public void setLikes(Likes likes) {
         this.likes = likes;
+    }
+
+    public Comments getComments() {
+        return comments;
+    }
+
+    public void setComments(Comments comments) {
+        this.comments = comments;
     }
 }

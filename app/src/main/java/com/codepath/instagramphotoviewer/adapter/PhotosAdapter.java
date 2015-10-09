@@ -9,8 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.instagramphotoviewer.model.instagram.Caption;
+import com.codepath.instagramphotoviewer.model.instagram.Comment;
+import com.codepath.instagramphotoviewer.model.instagram.Comments;
 import com.codepath.instagramphotoviewer.model.instagram.Image;
 import com.codepath.instagramphotoviewer.model.instagram.Photo;
+import com.codepath.instagramphotoviewer.model.instagram.User;
 import com.codepath.instragamphotoviewer.R;
 import com.squareup.picasso.Picasso;
 
@@ -50,7 +53,46 @@ public class PhotosAdapter extends ArrayAdapter<Photo> {
         Image standardResolutionImage = photo.getImages().getStandardResolutionImage();
         Picasso.with(getContext()).load(standardResolutionImage.getUrl()).placeholder(R.drawable.loading).into(ivPhoto);
         Picasso.with(getContext()).load(photo.getUser().getProfilePictureUrl()).into(ivUserPhoto);
+
+        Comments comments = photo.getComments();
+        int commentCount = comments.getCount();
+        if (commentCount == 0) {
+            convertView.findViewById(R.id.rlComment1).setVisibility(View.INVISIBLE);
+            convertView.findViewById(R.id.rlComment2).setVisibility(View.INVISIBLE);
+        } else if (commentCount == 1) {
+            populateFirstComment(convertView, comments.getComments().get(0));
+            convertView.findViewById(R.id.rlComment2).setVisibility(View.INVISIBLE);
+        } else {
+            populateFirstComment(convertView, comments.getComments().get(0));
+            populateSecondComment(convertView, comments.getComments().get(1));
+        }
+
         return convertView;
+    }
+
+    private void populateFirstComment(View convertView, Comment comment) {
+        int photoResourceId = R.id.ivCommenterPhoto1;
+        int usernameResourceId = R.id.tvCommenterUsername1;
+        int commentResourceId = R.id.tvComment1;
+        populateComment(convertView, comment, photoResourceId, usernameResourceId, commentResourceId);
+    }
+
+    private void populateSecondComment(View convertView, Comment comment) {
+        int photoResourceId = R.id.ivCommenterPhoto2;
+        int usernameResourceId = R.id.tvCommenterUsername2;
+        int commentResourceId = R.id.tvComment2;
+        populateComment(convertView, comment, photoResourceId, usernameResourceId, commentResourceId);
+    }
+
+    private void populateComment(View convertView, Comment comment, int photoResourceId, int usernameResourceId, int commentResourceId) {
+        ImageView ivCommenterUserPhoto = (ImageView) convertView.findViewById(photoResourceId);
+        TextView tvCommenterUsername = (TextView) convertView.findViewById(usernameResourceId);
+        TextView tvComment = (TextView) convertView.findViewById(commentResourceId);
+        User from = comment.getFrom();
+        tvCommenterUsername.setText(from.getUsername());
+        tvComment.setText(comment.getText());
+        ivCommenterUserPhoto.setImageResource(0);
+        Picasso.with(getContext()).load(from.getProfilePictureUrl()).into(ivCommenterUserPhoto);
     }
 
 }

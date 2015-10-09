@@ -61,26 +61,15 @@
         android:padding="10dp"
         android:id="@+id/relativeLayout">
 
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/ivUserPhoto"-->
-            <!--android:minHeight="15dp"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_alignParentStart="true" />-->
-
-
-
-
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/relativeLayout"
+        android:id="@+id/rlUser"
         android:padding="10dp">
 
         <com.makeramen.roundedimageview.RoundedImageView
@@ -142,5 +131,142 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/rlUser"
+        android:id="@+id/rlComment1"
+        android:padding="10dp"
+        >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ivCommenterPhoto1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="30dp"
+            android:minHeight="30dp"
+            android:scaleType="fitCenter"
+            app:riv_corner_radius="30dip"
+            app:riv_border_width="2dip"
+            app:riv_border_color="#333333"
+            app:riv_mutate_background="true"
+            app:riv_tile_mode="repeat"
+            app:riv_oval="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="comment from"
+            android:id="@+id/tvCommentFrom1"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/ivCommenterPhoto1"
+            android:layout_toEndOf="@+id/ivCommenterPhoto1"
+            android:layout_marginRight="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="username"
+            android:textColor="@android:color/holo_red_light"
+            android:id="@+id/tvCommenterUsername1"
+            android:minHeight="100dp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/tvCommentFrom1"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/tvCommentFrom1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="this is a test caption"
+            android:id="@+id/tvComment1"
+            android:textSize="20sp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:layout_below="@+id/tvCommentFrom1"
+            android:layout_toRightOf="@+id/ivCommenterPhoto1"
+            android:layout_alignRight="@+id/tvCommenterUsername1"
+            android:layout_alignEnd="@+id/tvCommenterUsername1" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/rlComment1"
+        android:id="@+id/rlComment2"
+        android:padding="10dp"
+        >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ivCommenterPhoto2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="30dp"
+            android:minHeight="30dp"
+            android:scaleType="fitCenter"
+            app:riv_corner_radius="30dip"
+            app:riv_border_width="2dip"
+            app:riv_border_color="#333333"
+            app:riv_mutate_background="true"
+            app:riv_tile_mode="repeat"
+            app:riv_oval="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="comment from"
+            android:id="@+id/tvCommentFrom2"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/ivCommenterPhoto2"
+            android:layout_toEndOf="@+id/ivCommenterPhoto2"
+            android:layout_marginRight="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="username"
+            android:textColor="@android:color/holo_red_light"
+            android:id="@+id/tvCommenterUsername2"
+            android:minHeight="100dp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/tvCommentFrom2"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/tvCommentFrom2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="this is a test caption"
+            android:id="@+id/tvComment2"
+            android:textSize="20sp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:layout_below="@+id/tvCommentFrom2"
+            android:layout_toRightOf="@+id/ivCommenterPhoto2"
+            android:layout_alignRight="@+id/tvCommenterUsername2"
+            android:layout_alignEnd="@+id/tvCommenterUsername2" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
