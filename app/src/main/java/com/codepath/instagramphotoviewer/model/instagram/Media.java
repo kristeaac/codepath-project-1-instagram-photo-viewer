@@ -24,6 +24,10 @@ public class Media {
         return "image".equals(type);
     }
 
+    public boolean isVideo() {
+        return "video".equals(type);
+    }
+
     public Images getImages() {
         return images;
     }
