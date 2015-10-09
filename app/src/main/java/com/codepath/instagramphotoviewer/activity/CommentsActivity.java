@@ -3,6 +3,7 @@ package com.codepath.instagramphotoviewer.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -19,6 +20,7 @@ public class CommentsActivity extends Activity {
     private List<Comment> comments;
     private CommentsAdapter aComments;
     private String photoId;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +29,28 @@ public class CommentsActivity extends Activity {
 
         Intent intent = getIntent();
         photoId = intent.getStringExtra(ExtraKeys.PHOTO_ID);
+        setupSwitchRefreshLayout();
 
         comments = new ArrayList<>();
         aComments = new CommentsAdapter(this, comments);
         ListView lvComments = (ListView) findViewById(R.id.lvComments);
         lvComments.setAdapter(aComments);
         fetchPopularComments();
+    }
+
+    private void setupSwitchRefreshLayout() {
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchPopularComments();
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
     }
 
     private void fetchPopularComments() {
@@ -42,7 +60,7 @@ public class CommentsActivity extends Activity {
                 aComments.clear();
                 comments.addAll(allComments);
                 aComments.notifyDataSetChanged();
-                // TODO swipeContainer.setRefreshing(false);
+                swipeContainer.setRefreshing(false);
             }
 
             @Override
