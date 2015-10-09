@@ -23,6 +23,7 @@ import com.squareup.picasso.Picasso;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class MediaAdapter extends ArrayAdapter<Media> {
             tvPostedTime.setText(PRETTY_TIME.format(new Date(Long.parseLong(caption.getCreatedTime()) * 1000)));
         }
         tvUsername.setText(media.getUser().getUsername());
-        tvLikeCount.setText(String.valueOf(media.getLikes().getCount()));
+        tvLikeCount.setText(NumberFormat.getIntegerInstance().format(media.getLikes().getCount()));
         ivPhoto.setImageResource(0);
         ivUserPhoto.setImageResource(0);
         Image standardResolutionImage = media.getImages().getStandardResolutionImage();
@@ -90,7 +91,7 @@ public class MediaAdapter extends ArrayAdapter<Media> {
         }
 
         TextView tvMoreComments = (TextView) convertView.findViewById(R.id.tvMoreComments);
-        tvMoreComments.setText(String.format("%s total comment(s)", commentCount));
+        tvMoreComments.setText(String.format("%s total comment(s)", NumberFormat.getIntegerInstance().format(commentCount)));
         tvMoreComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
